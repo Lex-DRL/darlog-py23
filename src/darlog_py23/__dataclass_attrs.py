@@ -6,7 +6,7 @@ Defines ``dataclass`` decorator regardless of Python version.
 On versions below 3.7, attempts to use ``attr.s`` and falls back to an empty (dummy) decorator
 if no implementation is found.
 
-Similarly, it defines ``attrs`` which tries to fall back to ``dataclass`` if found.
+Similarly, it defines ``attrs`` wrapper which tries to fall back to ``dataclass`` if found.
 """
 
 try:

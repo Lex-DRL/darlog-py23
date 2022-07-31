@@ -7,9 +7,17 @@ https://packaging.python.org/en/latest/guides/distributing-packages-using-setupt
 
 import codecs
 from os import path
-import re
+import sys
 
 from setuptools import find_packages, setup
+
+HERE = path.abspath(path.dirname(__file__))
+SRC_DIR = "src"
+
+sys.path.append(path.join(HERE, SRC_DIR))
+
+import darlog_py23 as the_module
+
 
 NAME = "darlog-py23"
 KEYWORDS = ["2to3", "3to2", "six", "compatibility", "wrapper"]
@@ -31,14 +39,11 @@ CLASSIFIERS = [
 	"Topic :: Software Development :: Libraries :: Python Modules",
 	"Typing :: Typed",
 ]
+PYTHON_REQUIRES = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, !=3.6.*, <4"
 INSTALL_REQUIRES = ["six"]
 EXTRAS_REQUIRE = {
 	"dev": ["attrs"],
 }
-
-META_PATH = path.join("src", "darlog_py23", "__init__.py")
-
-HERE = path.abspath(path.dirname(__file__))
 
 
 def read_utf8(*parts):
@@ -54,49 +59,30 @@ def read_utf8(*parts):
 		return f.read()
 
 
-META_FILE = read_utf8(META_PATH)
+LONG_DESC = read_utf8("README.md")
+SHORT_DESC = the_module.__doc__.strip()
 
-
-def find_meta(meta):
-	"""
-	Copyright (c) 2015 Hynek Schlawack
-	License: MIT
-
-	Utility function borrowed from ``attrs`` package.
-
-	Extract __*meta*__ from META_FILE.
-	"""
-	meta_match = re.search(
-		r"^__{meta}__\s*=\s*['\"]([^'\"]*)['\"]".format(meta=meta), META_FILE, re.M
-	)
-	if meta_match:
-		return meta_match.group(1)
-	raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
-
-
-AUTHOR = find_meta("author")
-
-LONG = read_utf8("README.md")
 
 if __name__ == '__main__':
 	setup(
 		name=NAME,
-		version=find_meta("version"),
-		description=find_meta("description"),
-		long_description=LONG,
-		long_description_content_type="text/markdown",  # https://packaging.python.org/en/latest/specifications/core-metadata/#description-content-type-optional
+		version=the_module.__version__,
+		description=SHORT_DESC,
+		long_description=LONG_DESC,
+		long_description_content_type="text/markdown",
+			# https://packaging.python.org/en/latest/specifications/core-metadata/#description-content-type-optional
 
-		url=find_meta("url"),
-		author=AUTHOR,
-		maintainer=AUTHOR,
-		license=find_meta("license"),
+		url=the_module.__url__,
+		author=the_module.__author__,
+		maintainer=the_module.__author__,
+		license=the_module.__license__,
 
 		classifiers=CLASSIFIERS,
 		keywords=KEYWORDS,
 
-		package_dir={"": "src"},
-		packages=find_packages(where="src"),
-		python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, !=3.6.*, <4",
+		package_dir={"": SRC_DIR},
+		packages=find_packages(where=SRC_DIR),
+		python_requires=PYTHON_REQUIRES,
 		install_requires=INSTALL_REQUIRES,
 		extras_require=EXTRAS_REQUIRE,
 	)
