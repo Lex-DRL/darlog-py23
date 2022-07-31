@@ -4,7 +4,7 @@
 """
 """
 
-import six as _six
+import sys as _sys
 
 try:
 	import typing as _t
@@ -36,5 +36,7 @@ def to_least_str(val):
 		return unicode(val)
 
 
-if _six.PY3:
+PY3 = _sys.version_info[0] == 3
+
+if PY3:
 	to_least_str = str

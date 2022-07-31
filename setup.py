@@ -40,7 +40,9 @@ CLASSIFIERS = [
 	"Typing :: Typed",
 ]
 PYTHON_REQUIRES = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, !=3.6.*, <4"
-INSTALL_REQUIRES = ["six"]
+INSTALL_REQUIRES = [
+	# "six",
+]
 EXTRAS_REQUIRE = {
 	"dev": ["attrs"],
 }
