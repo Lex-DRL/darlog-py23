@@ -1,4 +1,4 @@
-# darlog-py23
+# [darlog-py23](https://pypi.org/project/darlog-py23/)
 
 A tiny compatibility module for cross-Python2/3 code.
 It's not a replacement for neither ``six`` nor ``__future__`` modules but is more of an extension to them.
