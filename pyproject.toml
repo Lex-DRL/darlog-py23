@@ -1,7 +1,8 @@
 [build-system]
 requires = [
     "setuptools>=40",
-    "wheel"
+    "wheel",
+    "darlog-pypi"
 ]
 build-backend = "setuptools.build_meta"
 

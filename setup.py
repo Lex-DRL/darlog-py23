@@ -5,21 +5,22 @@
 https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#setup-args
 """
 
-import codecs
 from os import path
 import sys
 
 from setuptools import find_packages, setup
 
+import darlog_pypi
+
 HERE = path.abspath(path.dirname(__file__))
 SRC_DIR = "src"
 
 sys.path.append(path.join(HERE, SRC_DIR))
-
 import darlog_py23 as the_module
 
 
-NAME = "darlog-py23"
+PACKAGES = find_packages(where=SRC_DIR)
+NAME = darlog_pypi.module_name_to_project(PACKAGES[0])
 KEYWORDS = ["2to3", "3to2", "six", "compatibility", "wrapper"]
 CLASSIFIERS = [
 	# https://pypi.org/classifiers/
@@ -44,24 +45,15 @@ INSTALL_REQUIRES = [
 	# "six",
 ]
 EXTRAS_REQUIRE = {
-	"dev": ["attrs"],
+	"dev": [
+		"attrs",
+
+		"darlog-pypi",
+	],
 }
 
 
-def read_utf8(*parts):
-	"""
-	Copyright (c) 2015 Hynek Schlawack
-	License: MIT
-
-	Utility function borrowed from ``attrs`` package.
-
-	Build an absolute path from *parts* and return the contents of the resulting file.
-	"""
-	with codecs.open(path.join(HERE, *parts), "rb", encoding="utf-8") as f:
-		return f.read()
-
-
-LONG_DESC = read_utf8("README.md")
+LONG_DESC = darlog_pypi.ReadmeUpdater.from_rel_path(HERE, "README.md", NAME).update_for_github().text_for_pypi()
 SHORT_DESC = the_module.__doc__.strip()
 
 
@@ -83,7 +75,7 @@ if __name__ == '__main__':
 		keywords=KEYWORDS,
 
 		package_dir={"": SRC_DIR},
-		packages=find_packages(where=SRC_DIR),
+		packages=PACKAGES,
 		python_requires=PYTHON_REQUIRES,
 		install_requires=INSTALL_REQUIRES,
 		extras_require=EXTRAS_REQUIRE,
