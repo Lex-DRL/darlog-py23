@@ -6,10 +6,11 @@ A tiny compatibility module for cross-Python2/3 code.
 """
 
 from .__dataclass_attrs import *
+from .__py_ver import *
 from .__str import *
 
 
-__version_info__ = (1, 0, 3)
+__version_info__ = (1, 1, 0)
 __version__ = ".".join(str(x) for x in __version_info__)
 
 __url__ = "https://github.com/Lex-DRL/darlog-py23"
