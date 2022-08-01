@@ -171,9 +171,39 @@ def _attrs_with_dataclass_py310(
 	return wrap(maybe_cls)
 
 
+def _attrs_fallback(
+	maybe_cls=None,
+	these=None, repr_ns=None,
+
+	init=True, repr=True, eq=True, order=False, hash=None, frozen=False,
+	match_args=True, kw_only=False, slots=False,
+
+	cmp=None, weakref_slot=True, str=False, auto_attribs=False,
+	cache_hash=False, auto_exc=False, auto_detect=False, collect_by_mro=False, getstate_setstate=None,
+	on_setattr=None, field_transformer=None,
+):
+	# type: (_C, ...) -> _U[_C, _Callable[[_C], _C]]
+	eq, order = _determine_attrs_eq_order(cmp, eq, order, None)
+	repr = repr or str
+
+	def wrap(cls):
+		# type: (_C) -> _C
+		cls = dataclass_fallback(
+			cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=hash, frozen=frozen,
+			match_args=match_args, kw_only=kw_only, slots=slots,
+		)
+		if str:
+			cls.__str__ = cls.__repr__
+		return cls
+
+	if maybe_cls is None:
+		return wrap
+	return wrap(maybe_cls)
+
+
 if _attrs_import_error is None:
 	attrs = _attr.s
 elif _dataclass_import_error is None:
 	attrs = _attrs_with_dataclass_py310 if PY310 else _attrs_with_dataclass_py37
 else:
-	attrs = dataclass_fallback
+	attrs = _attrs_fallback
