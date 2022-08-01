@@ -27,7 +27,7 @@ except ImportError:
 	pass
 
 try:
-	from dataclasses import dataclass as _dataclass_raw
+	from dataclasses import dataclass as _dataclass_builtin
 	_dataclass_import_error = None
 except ImportError as _e:
 	_dataclass_import_error = _e
@@ -38,8 +38,9 @@ try:
 except ImportError as _e:
 	_attrs_import_error = _e
 
-from .__attrs import _determine_attrs_eq_order
 from .__py_ver import *
+from .__attrs import _determine_attrs_eq_order
+from .__dataclass_fallback import dataclass_fallback
 
 
 def _dataclass_wrapper_py37(
@@ -48,7 +49,8 @@ def _dataclass_wrapper_py37(
 	match_args=True, kw_only=False, slots=False, **kwargs
 ):
 	# type: (_C, bool, ...) -> _U[_C, _Callable[[_C], _C]]
-	return _dataclass_raw(cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=unsafe_hash, frozen=frozen)
+	return _dataclass_builtin(cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=unsafe_hash, frozen=frozen)
+
 
 def _dataclass_wrapper_py310(
 	cls=None,
@@ -56,10 +58,11 @@ def _dataclass_wrapper_py310(
 	match_args=True, kw_only=False, slots=False, **kwargs
 ):
 	# type: (_C, bool, ...) -> _U[_C, _Callable[[_C], _C]]
-	return _dataclass_raw(
+	return _dataclass_builtin(
 		cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=unsafe_hash, frozen=frozen,
 		match_args=match_args, kw_only=kw_only, slots=slots,
 	)
+
 
 def _dataclass_with_attrs(
 	cls=None,
@@ -106,7 +109,7 @@ if _dataclass_import_error is None:
 elif _attrs_import_error is None:
 	dataclass = _dataclass_with_attrs
 else:
-	dataclass = dummy_class_decorator
+	dataclass = dataclass_fallback
 
 
 def _attrs_with_dataclass_py37(
@@ -126,7 +129,7 @@ def _attrs_with_dataclass_py37(
 
 	def wrap(cls):
 		# type: (_C) -> _C
-		cls = _dataclass_raw(
+		cls = _dataclass_builtin(
 			cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=hash, frozen=frozen,
 		)
 		if str:
@@ -155,7 +158,7 @@ def _attrs_with_dataclass_py310(
 
 	def wrap(cls):
 		# type: (_C) -> _C
-		cls = _dataclass_raw(
+		cls = _dataclass_builtin(
 			cls, init=init, repr=repr, eq=eq, order=order, unsafe_hash=hash, frozen=frozen,
 			match_args=match_args, kw_only=kw_only, slots=slots,
 		)
@@ -173,4 +176,4 @@ if _attrs_import_error is None:
 elif _dataclass_import_error is None:
 	attrs = _attrs_with_dataclass_py310 if PY310 else _attrs_with_dataclass_py37
 else:
-	attrs = dummy_class_decorator
+	attrs = dataclass_fallback
