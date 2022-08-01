@@ -4,12 +4,12 @@
 """
 """
 
-import sys as _sys
-
 try:
 	import typing as _t
 except ImportError:
 	pass
+
+from .__py_ver import *
 
 
 def to_least_str(val):
@@ -35,8 +35,6 @@ def to_least_str(val):
 			return val
 		return unicode(val)
 
-
-PY3 = _sys.version_info[0] == 3
 
 if PY3:
 	to_least_str = str

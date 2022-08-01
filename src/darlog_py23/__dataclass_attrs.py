@@ -39,11 +39,7 @@ except ImportError as _e:
 	_attrs_import_error = _e
 
 from .__attrs import _determine_attrs_eq_order
-
-import sys as _sys
-
-
-PY310 = _sys.version_info[0:2] >= (3, 10)
+from .__py_ver import *
 
 
 def _dataclass_wrapper_py37(
