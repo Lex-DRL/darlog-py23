@@ -16,7 +16,7 @@ HERE = path.abspath(path.dirname(__file__))
 SRC_DIR = "src"
 
 sys.path.append(path.join(HERE, SRC_DIR))
-import darlog_py23 as the_module
+from darlog import py23 as the_module
 
 
 PACKAGES = find_packages(where=SRC_DIR)
