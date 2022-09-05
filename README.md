@@ -43,21 +43,3 @@ The minimal implementation of `dataclass` working in any Python version above 2.
 It doesn't do any "attribute is `Field` instance" stuff or any other `getattr`/`setattr` magic.
 
 This is what both `@dataclass` and `@attrs` fall back to as the last resort. I don't know why would you need it explicitly, though - but here it is.
-
-## Installation
-
-```shell script
-python -m pip install -U darlog-py23
-```
-
-## Development
-
-You can clone the git repo and add the contents of `src/` directory to your python installation by running this command in the repo root:
-```shell script
-python -m pip install -e .[dev]
-```
-
-The version is specified in the main `__init__.py` file. To update the binary distribution (wheel), run:
-```shell script
-python setup.py bdist_wheel sdist
-```
