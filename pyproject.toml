@@ -1,11 +1,6 @@
 [build-system]
 requires = [
     "setuptools>=40",
-    "wheel",
-    "darlog-pypi"
+    "darlog-pypi",
 ]
 build-backend = "setuptools.build_meta"
-
-[project]
-readme = "README.md"
-license = { file="LICENSE.md" }

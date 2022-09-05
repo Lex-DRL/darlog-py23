@@ -13,6 +13,7 @@ from .__str import *
 __version_info__ = (1, 1, 1)
 __version__ = ".".join(str(x) for x in __version_info__)
 
+__pypi_package__ = "darlog-py23"
 __url__ = "https://github.com/Lex-DRL/darlog-py23"
 __uri__ = __url__
 
