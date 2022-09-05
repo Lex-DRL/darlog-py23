@@ -73,6 +73,10 @@
 *.[Ww][Oo][Ff][Ff] binary
 *.[Ww][Oo][Ff][Ff]2 binary
 
+# Images: HDR
+*.[Ee][Xx][Rr] binary
+*.[Hh][Dd][Rr] binary
+
 # Images: Primary
 *.[Bb][Mm][Pp] binary
 *.[Gg][Ii][Ff] binary
@@ -82,10 +86,6 @@
 *.[Tt][Gg][Aa] binary
 *.[Tt][Ii][Ff] binary
 *.[Tt][Ii][Ff][Ff] binary
-
-# Images: HDR
-*.[Ee][Xx][Rr] binary
-*.[Hh][Dd][Rr] binary
 
 # Images: Other
 *.[Cc][Uu][Rr] binary
@@ -111,3 +111,9 @@
 *.[Mm][Kk][Vv] binary
 *.[Oo][Gg][VvXx] binary
 *.[Ss][Ww][Ff] binary
+
+
+# =========================================================================== #
+# 	Repo-specific
+# =========================================================================== #
+# add here
