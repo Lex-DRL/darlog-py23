@@ -1,9 +1,9 @@
-﻿# Auto-detect text/binary by default:
+# Auto-detect text/binary by default:
 * 	text=auto eol=lf
 
 # raw-Text files
 *.[Cc][Ss][Vv] text
-*.[Mm][Dd] text
+*.[Mm][Dd] text diff=markdown
 *.[Tt][Xx][Tt] text
 
 # Checksums
@@ -16,21 +16,25 @@
 *.[Cc][Mm][Dd] text
 *.[Pp][Ll] text
 *.[Pp][Ss]1 text
-*.[Ss][Hh] text
+*.[Ss][Hh] text diff=bash
 
-# Scripts: various Programming languages
-*.[Cc][Ss] diff=csharp text
-*.[Cc][Ss][Ss] diff=css text
-*.[Hh] text
-*.[Hh][Tt][Mm] diff=html text
-*.[Hh][Tt][Mm][Ll] diff=html text
+# Scripts: Python
+*.[Pp][Yy] text diff=python
+
+# Scripts: Other programming languages
+*.[Cc][Ss] text !eol diff=csharp
+*.[Cc][Ss][Ss] text diff=css
+*.[Hh] text diff=cpp
+*.[Hh][Tt][Mm] text diff=html
+*.[Hh][Tt][Mm][Ll] text diff=html
 *.[Jj][Ss] text
 *.[Jj][Ss][Oo][Nn] text
-*.[Pp][Hh][Pp] text
-*.[Pp][Yy] diff=python text
+*.[Pp][Hh][Pp] text diff=php
 *.[Ss][Qq][Ll] text=auto eol=lf
-*.[Xx][Mm][Ll] diff=html text
-*.[Xx][Hh][Tt][Mm][Ll] diff=html text
+*.[Xx][Mm][Ll] text diff=html
+*.[Xx][Hh][Tt][Mm][Ll] text diff=html
+*.[Yy][Aa][Mm][Ll] text
+*.[Yy][Mm][Ll] text
 
 # Vector graphics
 *.[Ss][Vv][Gg] text
@@ -59,7 +63,7 @@
 *.[Bb][Yy][Tt][Ee][Ss] binary
 
 # Python binaries:
-*.[Pp][Yy][Dd] binary
+*.[Pp][Yy][CcDdOo] binary
 *.[Pp][Dd][Bb] binary
 *.[Ww][Hh][Ll] binary
 
@@ -70,24 +74,26 @@
 *.[Ww][Oo][Ff][Ff]2 binary
 
 # Images: Primary
-*.[Ee][Xx][Rr] binary
-*.[Hh][Dd][Rr] binary
+*.[Bb][Mm][Pp] binary
 *.[Gg][Ii][Ff] binary
 *.[Jj][Pp][Gg] binary
 *.[Jj][Pp][Ee][Gg] binary
 *.[Pp][Nn][Gg] binary
+*.[Tt][Gg][Aa] binary
+*.[Tt][Ii][Ff] binary
+*.[Tt][Ii][Ff][Ff] binary
 
-# Images: Secondary
-*.[Bb][Mm][Pp] binary
+# Images: HDR
+*.[Ee][Xx][Rr] binary
+*.[Hh][Dd][Rr] binary
+
+# Images: Other
 *.[Cc][Uu][Rr] binary
 *.[Ii][Cc][Nn][Ss] binary
 *.[Ii][Cc][OoNn] binary
 *.[Ii][Cc][Oo][Nn] binary
 *.[Pp][Dd][Ff] binary
 *.[Pp][Ss][DdBb] binary
-*.[Tt][Gg][Aa] binary
-*.[Tt][Ii][Ff] binary
-*.[Tt][Ii][Ff][Ff] binary
 
 # Audio
 *.[Aa][Aa][Cc] binary
@@ -99,7 +105,7 @@
 *.[Ww][Aa][Vv] binary
 
 # Video
-# mp4 catched by audio pattern
+# mp4 caught by audio pattern
 *.[Aa][Vv][Ii] binary
 *.[Bb][Ii][Kk] binary
 *.[Mm][Kk][Vv] binary
