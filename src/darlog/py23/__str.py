@@ -15,9 +15,11 @@ from .__py_ver import *
 # noinspection PyBroadException
 try:
 	# noinspection PyShadowingBuiltins
+	str_types = (str, unicode)
 	unicode = unicode
 except Exception:
 	# noinspection PyShadowingBuiltins
+	str_types = (str, )
 	unicode = str
 
 
@@ -36,10 +38,9 @@ def to_least_str(val):
 	if isinstance(val, str):
 		return val
 
-	# noinspection PyBroadException
 	try:
 		return str(val)
-	except Exception:
+	except UnicodeError:
 		if isinstance(val, unicode):
 			return val
 		return unicode(val)
@@ -54,10 +55,9 @@ def str_format(format_pattern, *args, **kwargs):
 	Python 3:
 		Just an alias for ``str.format``.
 	"""
-	# noinspection PyBroadException
 	try:
 		return format_pattern.format(*args, **kwargs)
-	except Exception:
+	except UnicodeError:
 		return unicode(format_pattern).format(*args, **kwargs)
 
 

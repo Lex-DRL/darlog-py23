@@ -10,7 +10,7 @@ from .__py_ver import *
 from .__str import *
 
 
-__version_info__ = (1, 2, 0)
+__version_info__ = (1, 2, 1)
 __version__ = ".".join(str(x) for x in __version_info__)
 
 __pypi_package__ = "darlog-py23"

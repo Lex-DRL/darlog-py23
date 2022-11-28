@@ -9,6 +9,12 @@ Defines the very basic stuff:
 `PY2`, `PY3`, `PY310` - simple flags indicating whether you're running under Python 2, 3 or 3.10+.
 
 ## Strings
+### `str_types`
+A tuple containing all the string types - ready to be passed to `isinstance()`:
+
+* Python 2 - `(str, unicode)`
+* Python 3 - `(str, )`
+
 ### `unicode`
 Type alias:
 
