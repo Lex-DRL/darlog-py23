@@ -3,9 +3,12 @@
 # https://setuptools.pypa.io/en/latest/build_meta.html
 # https://pypa-build.readthedocs.io/en/latest/
 
+# `setuptools` seem to support the modern build system since v43
+# (at least, it is the lowest major version with which build succeeds).
+
 [build-system]
 requires = [
-    "setuptools>=40",
+    "setuptools>=43",
     "darlog-pypi>=1.0.0",
 ]
 build-backend = "setuptools.build_meta"
